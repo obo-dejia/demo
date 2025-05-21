@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們 - 耀陽門窗</title>
+    <style>
+        /* 基礎樣式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* 頁首樣式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: absolute; /* 改為絕對定位，不會佔用空間 */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.fixed {
+            position: fixed; /* 滾動後固定在頂部 */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 16px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* 頁面標題 - 直接從頂部開始 */
+        .page-title {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/1920/600') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            margin-top: 0; /* 確保從頂部開始 */
+            padding-top: 80px; /* 為頁首預留空間 */
+        }
+        
+        .page-title h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+        }
+        
+        /* 關於我們內容 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            width: 70px;
+            height: 3px;
+            background-color: #3498db;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 公司介紹 */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #596775;
+            font-size: 1.05rem;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 數字統計 */
+        .stats-section {
+            background-color: #f1f8fe;
+            padding: 80px 0;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 30px 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #f1f8fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #3498db;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover .stat-icon {
+            background-color: #3498db;
+            color: #fff;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+        
+        /* 我們的團隊 */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .member-image {
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .member-position {
+            color: #3498db;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .member-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            background-color: #f1f8fe;
+            margin: 0 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+        
+        /* 發展歷程 */
+        .timeline-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #e1e1e1;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: #f8f9fa;
+            border: 4px solid #3498db;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: #fff;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .timeline-description {
+            color: #7f8c8d;
+        }
+        
+        /* 頁尾 */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-item h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            margin-right: 10px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: #3498db;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* 動畫 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 響應式設計 */
+        @media screen and (max-width: 991px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .page-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-content {
+                padding: 15px;
+            }
+            
+            .timeline-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <!-- 引入 Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 頁首 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                明富<span>鋁門窗</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首頁</a></li>
+                    <li><a href="about.html">關於我們</a></li>
+                    <li><a href="products.html">商品介紹</a></li>
+                    <li><a href="portfolio.html">作品集</a></li>
+                    <li><a href="contact.html">聯絡我們</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 頁面標題 -->
+    <div class="page-title">
+        <div class="container">
+            <h1>關於我們</h1>
+            <p>了解明富鋁門窗的品牌故事與專業服務</p>
+        </div>
+    </div>
+
+    <!-- 公司簡介 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>公司簡介</h2>
+                <p>明富鋁門窗成立於2010年，是台灣專業的鋁門窗安裝設計公司，致力於提供高品質的產品與服務。</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>我們的品牌故事</h3>
+                    <p>明富鋁門窗成立至今已有15年的歷史，由一群對門窗設計與安裝有熱情的專業人才所組成。我們秉持「品質第一、客戶至上」的經營理念，從設計、製造到安裝，每一個環節都嚴格把關，確保每一件產品都能符合客戶的需求與期待。</p>
+                    <p>多年來，我們不斷創新與進步，引進最新的材料與技術，為客戶提供最優質的產品。我們的產品涵蓋了氣密窗、鋁門窗、採光罩等多種類型，能夠滿足住宅、商業空間等各種場所的需求。</p>
+                    <p>我們深信，一個好的門窗不僅能提升建築物的美觀度，更能為居住者提供安全、舒適的生活環境。因此，我們一直致力於打造兼具美觀與實用性的門窗產品，讓每一位客戶都能享受到高品質的生活。</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://picsum.photos/600/400" alt="公司外觀">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 數字統計 -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>我們的成就</h2>
+                <p>多年來的專業服務與良好口碑，讓我們成為台灣鋁門窗業界的領導品牌</p>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number" id="years-count">0</div>
+                    <div class="stat-title">年服務經驗</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" id="clients-count">0</div>
+                    <div class="stat-title">滿意客戶</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-number" id="projects-count">0</div>
+                    <div class="stat-title">完成案例</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-number" id="awards-count">0</div>
+                    <div class="stat-title">榮獲獎項</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我們的團隊 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>專業團隊</h2>
+                <p>我們擁有一支經驗豐富、技術精湛的專業團隊</p>
+            </div>
+            <div class="team-container">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://picsum.photos/300/400" alt="團隊成員照片">
+                    </div>
+                    <div class="member-info">
+                        <h3>OOO</h3>
+                        <div class="member-position">創辦人 / 執行長</div>
+                        <p class="member-description">擁有20年門窗設計經驗，帶領明富鋁門窗成為業界領導品牌。</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://picsum.photos/300/400" alt="團隊成員照片">
+                    </div>
+                    <div class="member-info">
+                        <h3>OOO</h3>
+                        <div class="member-position">設計總監</div>
+                        <p class="member-description">畢業於知名設計學院，負責門窗設計與客製化方案規劃。</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://picsum.photos/300/400" alt="團隊成員照片">
+                    </div>
+                    <div class="member-info">
+                        <h3>OOO</h3>
+                        <div class="member-position">技術主管</div>
+                        <p class="member-description">擁有豐富的門窗安裝經驗，帶領安裝團隊提供專業服務。</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://picsum.photos/300/400" alt="團隊成員照片">
+                    </div>
+                    <div class="member-info">
+                        <h3>OOO</h3>
+                        <div class="member-position">客戶服務經理</div>
+                        <p class="member-description">致力於提供最優質的客戶服務體驗，確保客戶滿意度。</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 發展歷程 -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>公司發展歷程</h2>
+                <p>從創立至今，不斷成長與創新</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2010年</div>
+                        <h3 class="timeline-title">明富鋁門窗成立</h3>
+                        <p class="timeline-description">由陳建中先生創立於桃園市，開始提供基本的鋁門窗安裝服務。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2012年</div>
+                        <h3 class="timeline-title">業務擴展</h3>
+                        <p class="timeline-description">擴大業務範圍至全台灣，增加氣密窗與採光罩等產品線。</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2015年</div>
+                        <h3 class="timeline-title">台中分部成立</h3>
+                        <p class="timeline-description">為了更好地服務中部地區客戶，在台中設立第一個分部。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018年</div>
+                        <h3 class="timeline-title">品質認證</h3>
+                        <p class="timeline-description">獲得ISO9001品質管理系統認證，確保產品與服務品質。</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020年</div>
+                        <h3 class="timeline-title">高雄分部成立</h3>
+                        <p class="timeline-description">為擴大市場覆蓋率，在高雄成立南部地區服務中心。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023年</div>
+                        <h3 class="timeline-title">引進先進技術</h3>
+                        <p class="timeline-description">引進國際先進的門窗設計與製造技術，提升產品質量與效能。</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年</div>
+                        <h3 class="timeline-title">現在與未來</h3>
+                        <p class="timeline-description">持續創新發展，為客戶提供更優質的門窗產品與服務體驗。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-item footer-about">
+                    <h4>關於明富鋁門窗</h4>
+                    <p>專業的鋁門窗、氣密窗及採光罩設計與安裝團隊，致力於提供客戶高品質的產品與服務。</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-line"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-item">
+                    <h4>快速連結</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px;"><a href="index.html">首頁</a></li>
+                        <li style="margin-bottom: 15px;"><a href="about.html">關於我們</a></li>
+                        <li style="margin-bottom: 15px;"><a href="products.html">商品介紹</a></li>
+                        <li style="margin-bottom: 15px;"><a href="portfolio.html">作品集</a></li>
+                        <li style="margin-bottom: 15px;"><a href="contact.html">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div class="footer-item">
+                    <h4>聯絡資訊</h4>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 桃園市中壢區中央路123號</p>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-phone" style="margin-right: 10px;"></i> 03-123-4567</p>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@yaoyangwindows.com</p>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> 週一至週五: 09:00 - 18:00</p>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> 週六: 10:00 - 15:00</p>
+                    <p style="margin-bottom: 15px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> 週日: 休息</p>
+                </div>
+                <div class="footer-item">
+                    <h4>訂閱電子報</h4>
+                    <p style="margin-bottom: 20px;">訂閱我們的電子報以獲取最新產品與優惠資訊。</p>
+                    <div style="position: relative;">
+                        <input type="email" placeholder="您的電子郵件" style="width: 100%; padding: 15px; padding-right: 50px; background-color: rgba(255,255,255,0.1); border: none; border-radius: 30px; color: #fff;">
+                        <button type="submit" style="position: absolute; right: 5px; top: 5px; height: calc(100% - 10px); width: 40px; background-color: #3498db; border: none; border-radius: 50%; color: #fff; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 明富欣有限公司. 版權所有。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+    // 當頁面載入完成後執行
+    document.addEventListener('DOMContentLoaded', function() {
+        // 設定頁首滾動固定效果
+        const header = document.querySelector('header');
+        const pageTitle = document.querySelector('.page-title');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > pageTitle.offsetHeight) {
+                header.classList.add('fixed');
+            } else {
+                header.classList.remove('fixed');
+            }
+        });
+        
+        // 設定動態數字效果
+        // 設定目標數字
+        const targetYears = 15;
+        const targetClients = 500;
+        const targetProjects = 1200;
+        const targetAwards = 25;
+        
+        // 設定動畫持續時間（毫秒）
+        const animationDuration = 2000;
+        
+        // 設定更新間隔（毫秒）
+        const updateInterval = 20;
+        
+        // 計算每次更新增加的數值
+        const stepsYears = targetYears / (animationDuration / updateInterval);
+        const stepsClients = targetClients / (animationDuration / updateInterval);
+        const stepsProjects = targetProjects / (animationDuration / updateInterval);
+        const stepsAwards = targetAwards / (animationDuration / updateInterval);
+        
+        // 初始數值
+        let currentYears = 0;
+        let currentClients = 0;
+        let currentProjects = 0;
+        let currentAwards = 0;
+        
+        // 設定統計區域的可見性檢測
+        const statsSection = document.querySelector('.stats-section');
+        const statItems = document.querySelectorAll('.stat-item');
+        
+        // 初始隱藏統計項目
+        statItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.5s ease';
+        });
+        
+        // 檢查元素是否在視窗中
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+            );
+        }
+        
+        // 動態數字更新函數
+        function animateNumbers() {
+            const timer = setInterval(function() {
+                // 更新年份數字
+                currentYears += stepsYears;
+                if (currentYears >= targetYears) {
+                    currentYears = targetYears;
+                }
+                document.getElementById('years-count').textContent = Math.floor(currentYears);
+                
+                // 更新客戶數字
+                currentClients += stepsClients;
+                if (currentClients >= targetClients) {
+                    currentClients = targetClients;
+                }
+                document.getElementById('clients-count').textContent = Math.floor(currentClients) + "+";
+                
+                // 更新專案數字
+                currentProjects += stepsProjects;
+                if (currentProjects >= targetProjects) {
+                    currentProjects = targetProjects;
+                }
+                document.getElementById('projects-count').textContent = Math.floor(currentProjects) + "+";
+                
+                // 更新獎項數字
+                currentAwards += stepsAwards;
+                if (currentAwards >= targetAwards) {
+                    currentAwards = targetAwards;
+                }
+                document.getElementById('awards-count').textContent = Math.floor(currentAwards);
+                
+                // 當所有數字都達到目標值時，停止計時器
+                if (currentYears >= targetYears && currentClients >= targetClients && 
+                    currentProjects >= targetProjects && currentAwards >= targetAwards) {
+                    clearInterval(timer);
+                }
+            }, updateInterval);
+        }
+        
+        // 顯示統計項目的函數
+        function showStatItems() {
+            statItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            // 啟動數字動畫
+            animateNumbers();
+        }
+        
+        // 滾動事件處理
+        let animationTriggered = false;
+        
+        function handleScroll() {
+            if (!animationTriggered && isElementInViewport(statsSection)) {
+                showStatItems();
+                animationTriggered = true;
+                // 移除滾動事件監聽器
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+        
+        // 添加滾動事件監聽器
+        window.addEventListener('scroll', handleScroll);
+        
+        // 頁面加載時檢查一次
+        handleScroll();
+    });
+    </script>
+</body>
+</html>
